@@ -1,7 +1,17 @@
-.vs/ 
-bin/ 
-obj/ 
-packages/ 
-*.user 
-*.suo 
-*.cache 
+# Ignorar archivos y carpetas de Visual Studio
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+
+# Ignorar archivos temporales
+*.tmp
+*.vsidx
+
+# Ignorar configuraciones locales
+*.db
+*.db-shm
+*.db-wal

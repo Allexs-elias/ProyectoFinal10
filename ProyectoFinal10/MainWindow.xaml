@@ -128,58 +128,52 @@
                 </ScrollViewer>
             </TabItem>
 
-            <!-- Buscar -->
+            <!-- Buscar con CRUD -->
             <TabItem Header="Buscar">
                 <ScrollViewer Background="#FFFDF6DC">
                     <StackPanel Margin="20" HorizontalAlignment="Center" MaxWidth="1000">
+
+                        <!-- Barra de busqueda -->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-                            <TextBox x:Name="TxtBuscar" Width="Auto" MinWidth="200" Height="35" FontSize="16" Text="Buscando noticia"/>
+                            <TextBox x:Name="TxtBuscar" Width="Auto" MinWidth="200" Height="35" FontSize="16" Text=""/>
                             <Button Content="Buscar" Width="80" Height="35" FontWeight="Bold" Background="#FFEA9A25" Foreground="White" Margin="10,0,0,0" Click="BtnBuscarEjecutar_Click"/>
                         </StackPanel>
 
-                        <WrapPanel HorizontalAlignment="Center" ItemWidth="280" ItemHeight="190">
-                            <Border Background="#FFFAD45B" CornerRadius="10" Padding="10" Margin="10">
-                                <StackPanel>
-                                    <Image Source="https://via.placeholder.com/280x100" Stretch="Fill" Height="100" />
-                                    <TextBlock Text="Noticia de ejemplo 1: Descubrimiento científico reciente" FontSize="14" TextWrapping="Wrap" Margin="0,10,0,0" TextAlignment="Center" HorizontalAlignment="Center"/>
-                                </StackPanel>
-                            </Border>
+                        <!-- Campos CRUD -->
+                        <Grid Margin="0,10,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                            <Border Background="#FFF77B47" CornerRadius="10" Padding="10" Margin="10">
-                                <StackPanel>
-                                    <Image Source="https://via.placeholder.com/280x100" Stretch="Fill" Height="100" />
-                                    <TextBlock Text="Noticia de ejemplo 2: Avances en tecnología y salud" FontSize="14" TextWrapping="Wrap" Margin="0,10,0,0" TextAlignment="Center" HorizontalAlignment="Center"/>
-                                </StackPanel>
-                            </Border>
+                            <StackPanel Grid.Column="0" Margin="10">
+                                <TextBlock Text="Título:" FontWeight="Bold"/>
+                                <TextBox x:Name="TxtTitulo" Height="30"/>
 
-                            <Border Background="#FFFAD45B" CornerRadius="10" Padding="10" Margin="10">
-                                <StackPanel>
-                                    <Image Source="https://via.placeholder.com/280x100" Stretch="Fill" Height="100" />
-                                    <TextBlock Text="Noticia de ejemplo 3: Eventos deportivos destacados" FontSize="14" TextWrapping="Wrap" Margin="0,10,0,0" TextAlignment="Center" HorizontalAlignment="Center"/>
-                                </StackPanel>
-                            </Border>
+                                <TextBlock Text="Descripción:" FontWeight="Bold" Margin="0,10,0,0"/>
+                                <TextBox x:Name="TxtDescripcion" Height="60" TextWrapping="Wrap" AcceptsReturn="True"/>
 
-                            <Border Background="#FFF77B47" CornerRadius="10" Padding="10" Margin="10">
-                                <StackPanel>
-                                    <Image Source="https://via.placeholder.com/280x100" Stretch="Fill" Height="100" />
-                                    <TextBlock Text="Noticia de ejemplo 4: Cambios políticos globales" FontSize="14" TextWrapping="Wrap" Margin="0,10,0,0" TextAlignment="Center" HorizontalAlignment="Center"/>
-                                </StackPanel>
-                            </Border>
+                                <TextBlock Text="Categoría:" FontWeight="Bold" Margin="0,10,0,0"/>
+                                <TextBox x:Name="TxtCategoria" Height="30"/>
+                            </StackPanel>
 
-                            <Border Background="#FFFAD45B" CornerRadius="10" Padding="10" Margin="10">
-                                <StackPanel>
-                                    <Image Source="https://via.placeholder.com/280x100" Stretch="Fill" Height="100" />
-                                    <TextBlock Text="Noticia de ejemplo 5: Innovaciones en energías renovables" FontSize="14" TextWrapping="Wrap" Margin="0,10,0,0" TextAlignment="Center" HorizontalAlignment="Center"/>
-                                </StackPanel>
-                            </Border>
+                            <StackPanel Grid.Column="1" Margin="10">
+                                <TextBlock Text="Autor:" FontWeight="Bold"/>
+                                <TextBox x:Name="TxtAutor" Height="30"/>
 
-                            <Border Background="#FFF77B47" CornerRadius="10" Padding="10" Margin="10">
-                                <StackPanel>
-                                    <Image Source="https://via.placeholder.com/280x100" Stretch="Fill" Height="100" />
-                                    <TextBlock Text="Noticia de ejemplo 6: Cultura y arte contemporáneo" FontSize="14" TextWrapping="Wrap" Margin="0,10,0,0" TextAlignment="Center" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Fecha de Publicación:" FontWeight="Bold" Margin="0,10,0,0"/>
+                                <DatePicker x:Name="DpFecha" Height="30"/>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                                    <Button x:Name="BtnAgregar" Content="Agregar" Width="80" Height="30" Margin="5" Background="Green" Foreground="White" Click="BtnAgregar_Click"/>
+                                    <Button x:Name="BtnActualizar" Content="Actualizar" Width="80" Height="30" Margin="5" Background="DodgerBlue" Foreground="White" Click="BtnActualizar_Click"/>
+                                    <Button x:Name="BtnEliminar" Content="Eliminar" Width="80" Height="30" Margin="5" Background="Red" Foreground="White" Click="BtnEliminar_Click"/>
                                 </StackPanel>
-                            </Border>
-                        </WrapPanel>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- Tabla -->
+                        <DataGrid x:Name="DgNoticias" AutoGenerateColumns="True" Margin="10" MinHeight="300" SelectionChanged="DgNoticias_SelectionChanged"/>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
