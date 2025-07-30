@@ -1,0 +1,188 @@
+﻿<Window x:Class="Proyecto_Final.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="C NEWS" MinHeight="600" MinWidth="800" Background="#FFFDF6DC"
+        SizeToContent="Manual">
+    <DockPanel LastChildFill="True">
+
+        <!-- Encabezado -->
+        <Grid DockPanel.Dock="Top" Background="#FF1C1C1C" Height="50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Button x:Name="BtnDescubrir" Content="Descubrir" Foreground="White" Background="#FF1C1C1C" BorderBrush="#FF1C1C1C" Width="100" FontWeight="Bold" Click="BtnDescubrir_Click"/>
+                <Button x:Name="BtnRecientes" Content="Recientes" Foreground="White" Background="#FF1C1C1C" BorderBrush="#FF1C1C1C" Width="100" FontWeight="Bold" Click="BtnRecientes_Click"/>
+                <Button x:Name="BtnDestacado" Content="Destacado" Foreground="White" Background="#FF1C1C1C" BorderBrush="#FF1C1C1C" Width="100" FontWeight="Bold" Click="BtnDestacado_Click"/>
+                <Button x:Name="BtnBuscar" Content="Buscar" Foreground="#FFEA9A25" Background="#FF1C1C1C" BorderBrush="#FF1C1C1C" Width="100" FontWeight="Bold" Click="BtnBuscar_Click"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
+                <Border Background="White" Padding="5" Margin="5">
+                    <TextBlock Text="C#" FontWeight="Bold" FontSize="18" Foreground="Black"/>
+                </Border>
+                <Border Background="Red" Padding="5" Margin="0,5,5,5">
+                    <TextBlock Text="NEWS" FontWeight="Bold" FontSize="18" Foreground="White"/>
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <!-- Contenido -->
+        <TabControl x:Name="MainTabControl" Background="#FFFDF6DC">
+            <TabControl.Resources>
+                <Style TargetType="TabPanel">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </Style>
+            </TabControl.Resources>
+
+            <!-- Descubrir -->
+            <TabItem Header="Descubrir">
+                <Grid Background="#FFFDF6DC">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1.5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <UniformGrid Rows="2" Columns="2" Margin="10" Grid.ColumnSpan="2">
+                        <Rectangle Fill="#FFFAD45B" Margin="10"/>
+                        <Rectangle Fill="#FFFAD45B" Margin="10"/>
+                        <Rectangle Fill="#FFFAD45B" Margin="10"/>
+                        <Rectangle Fill="#FFFAD45B" Margin="10"/>
+                    </UniformGrid>
+
+                    <Rectangle Fill="#FFF77B47" Grid.Column="2" Margin="10"/>
+                </Grid>
+            </TabItem>
+
+            <!-- Recientes -->
+            <TabItem Header="Recientes">
+                <ScrollViewer Background="#FFEFEFEF">
+                    <StackPanel Margin="30" HorizontalAlignment="Center">
+                        <WrapPanel HorizontalAlignment="Center" ItemWidth="400" ItemHeight="220">
+                            <Border Width="400" Height="220" Background="Black" Margin="10">
+                                <Grid>
+                                    <Image Source="https://via.placeholder.com/400x140" Stretch="Fill"/>
+                                    <StackPanel VerticalAlignment="Bottom" Background="#AA000000">
+                                        <TextBlock Text="La NASA lanza nuevo satélite de vigilancia global" TextWrapping="Wrap" Foreground="White" FontWeight="Bold" Padding="5"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+
+                            <Border Width="400" Height="220" Background="Black" Margin="10">
+                                <Grid>
+                                    <Image Source="https://via.placeholder.com/400x140" Stretch="Fill"/>
+                                    <StackPanel VerticalAlignment="Bottom" Background="#AA000000">
+                                        <TextBlock Text="Economía global se estabiliza tras meses de incertidumbre" TextWrapping="Wrap" Foreground="White" FontWeight="Bold" Padding="5"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </WrapPanel>
+
+                        <Border Width="Auto" Height="260" Background="Black" Margin="10">
+                            <Grid>
+                                <Image Source="https://via.placeholder.com/820x160" Stretch="Fill"/>
+                                <StackPanel VerticalAlignment="Bottom" Background="#AA000000">
+                                    <TextBlock Text="Descubren tecnología de IA que predice enfermedades antes de que aparezcan los síntomas" TextWrapping="Wrap" Foreground="White" FontWeight="Bold" Padding="5"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- Destacado -->
+            <TabItem Header="Destacado">
+                <ScrollViewer Background="#FFFDF6DC">
+                    <UniformGrid Columns="2" Rows="2" Margin="20" HorizontalAlignment="Center">
+                        <Border Background="#FFFAD45B" CornerRadius="10" Padding="10" Margin="10">
+                            <StackPanel>
+                                <Image Source="https://ichef.bbci.co.uk/news/640/cpsprodpb/14D2/production/_131774697_gettyimages-1785313720.jpg" Width="250" Height="140" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Histórica victoria de México en el Mundial Femenil" FontSize="14" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Background="#FFF77B47" CornerRadius="10" Padding="10" Margin="10">
+                            <StackPanel>
+                                <Image Source="https://ichef.bbci.co.uk/news/976/cpsprodpb/1816F/production/_131842211_afp.jpg" Width="250" Height="140" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Nueva ley ambiental busca frenar la deforestación" FontSize="14" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Background="#FFFAD45B" CornerRadius="10" Padding="10" Margin="10">
+                            <StackPanel>
+                                <Image Source="https://imagenes.elpais.com/resizer/wqPU9rq7Tz3-SNQWvuwSG5FrYxk=/1960x1470/cloudfront-eu-central-1.images.arcpublishing.com/prisa/2CBCEUZMK5BGZMQ3MDK6YCE3KY.jpg" Width="250" Height="140" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Científicos logran avance en energía de fusión nuclear" FontSize="14" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Background="#FFF77B47" CornerRadius="10" Padding="10" Margin="10">
+                            <StackPanel>
+                                <Image Source="https://imgmedia.libero.pe/640x372/libero/original/2023/10/17/652ee85913767d1c707936f4.jpg" Width="250" Height="140" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Lionel Messi nominado al Balón de Oro 2024" FontSize="14" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </UniformGrid>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- Buscar -->
+            <TabItem Header="Buscar">
+                <ScrollViewer Background="#FFFDF6DC">
+                    <StackPanel Margin="20" HorizontalAlignment="Center" MaxWidth="1000">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                            <TextBox x:Name="TxtBuscar" Width="Auto" MinWidth="200" Height="35" FontSize="16" Text="Buscando noticia"/>
+                            <Button Content="Buscar" Width="80" Height="35" FontWeight="Bold" Background="#FFEA9A25" Foreground="White" Margin="10,0,0,0" Click="BtnBuscarEjecutar_Click"/>
+                        </StackPanel>
+
+                        <WrapPanel HorizontalAlignment="Center" ItemWidth="280" ItemHeight="190">
+                            <Border Background="#FFFAD45B" CornerRadius="10" Padding="10" Margin="10">
+                                <StackPanel>
+                                    <Image Source="https://via.placeholder.com/280x100" Stretch="Fill" Height="100" />
+                                    <TextBlock Text="Noticia de ejemplo 1: Descubrimiento científico reciente" FontSize="14" TextWrapping="Wrap" Margin="0,10,0,0" TextAlignment="Center" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Background="#FFF77B47" CornerRadius="10" Padding="10" Margin="10">
+                                <StackPanel>
+                                    <Image Source="https://via.placeholder.com/280x100" Stretch="Fill" Height="100" />
+                                    <TextBlock Text="Noticia de ejemplo 2: Avances en tecnología y salud" FontSize="14" TextWrapping="Wrap" Margin="0,10,0,0" TextAlignment="Center" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Background="#FFFAD45B" CornerRadius="10" Padding="10" Margin="10">
+                                <StackPanel>
+                                    <Image Source="https://via.placeholder.com/280x100" Stretch="Fill" Height="100" />
+                                    <TextBlock Text="Noticia de ejemplo 3: Eventos deportivos destacados" FontSize="14" TextWrapping="Wrap" Margin="0,10,0,0" TextAlignment="Center" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Background="#FFF77B47" CornerRadius="10" Padding="10" Margin="10">
+                                <StackPanel>
+                                    <Image Source="https://via.placeholder.com/280x100" Stretch="Fill" Height="100" />
+                                    <TextBlock Text="Noticia de ejemplo 4: Cambios políticos globales" FontSize="14" TextWrapping="Wrap" Margin="0,10,0,0" TextAlignment="Center" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Background="#FFFAD45B" CornerRadius="10" Padding="10" Margin="10">
+                                <StackPanel>
+                                    <Image Source="https://via.placeholder.com/280x100" Stretch="Fill" Height="100" />
+                                    <TextBlock Text="Noticia de ejemplo 5: Innovaciones en energías renovables" FontSize="14" TextWrapping="Wrap" Margin="0,10,0,0" TextAlignment="Center" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Background="#FFF77B47" CornerRadius="10" Padding="10" Margin="10">
+                                <StackPanel>
+                                    <Image Source="https://via.placeholder.com/280x100" Stretch="Fill" Height="100" />
+                                    <TextBlock Text="Noticia de ejemplo 6: Cultura y arte contemporáneo" FontSize="14" TextWrapping="Wrap" Margin="0,10,0,0" TextAlignment="Center" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                        </WrapPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>
