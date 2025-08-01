@@ -3,6 +3,7 @@ using MongoDB.Driver;
 using System;
 using System.Data;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Proyecto_Final
@@ -71,6 +72,7 @@ namespace Proyecto_Final
                 dataTable.Columns.Add("fecha_publicacion");
                 dataTable.Columns.Add("categoria");
                 dataTable.Columns.Add("autor");
+                dataTable.Columns.Add("es_destacado", typeof(bool));
 
                 foreach (var noticia in noticias)
                 {
@@ -81,8 +83,10 @@ namespace Proyecto_Final
                     string fecha_publicacion = noticia.Contains("fecha_publicacion") && noticia["fecha_publicacion"].IsValidDateTime
                         ? noticia["fecha_publicacion"].ToLocalTime().ToShortDateString()
                         : "No registrada";
+                    bool destacado = noticia.Contains("es_destacado") && noticia["es_destacado"].AsBoolean;
+                    dataTable.Rows.Add(titulo, descripcion, fecha_publicacion, categoria, autor, destacado);
 
-                    dataTable.Rows.Add(titulo, descripcion, fecha_publicacion, categoria, autor);
+
                 }
 
                 DgNoticias.ItemsSource = dataTable.DefaultView;
@@ -180,5 +184,139 @@ namespace Proyecto_Final
                     DpFecha.SelectedDate = null;
             }
         }
+
+        private void BtnFavorito_Click(object sender, RoutedEventArgs e)
+        {
+            var boton = sender as Button;
+            string titulo = (string)boton.Tag;
+
+            try
+            {
+                var client = new MongoClient(connectionString);
+                var database = client.GetDatabase("noticiero_db");
+                var collection = database.GetCollection<BsonDocument>("noticias");
+
+                var filtro = Builders<BsonDocument>.Filter.Eq("titulo", titulo);
+                var update = Builders<BsonDocument>.Update.Set("es_destacado", true);
+                collection.UpdateOne(filtro, update);
+
+                MessageBox.Show("Agregado a Destacados.");
+                CambiarTab(2);
+                CargarNoticiasDestacadas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al agregar a destacados: " + ex.Message);
+            }
+        }
+
+        private void BtnEliminarFavorito_Click(object sender, RoutedEventArgs e)
+        {
+            var boton = sender as Button;
+            string titulo = (string)boton.Tag;
+
+            try
+            {
+                var client = new MongoClient(connectionString);
+                var database = client.GetDatabase("noticiero_db");
+                var collection = database.GetCollection<BsonDocument>("noticias");
+
+                var filtro = Builders<BsonDocument>.Filter.Eq("titulo", titulo);
+                var update = Builders<BsonDocument>.Update.Set("es_destacado", false);
+                collection.UpdateOne(filtro, update);
+
+                MessageBox.Show("Eliminado de destacados.");
+                CargarNoticiasDestacadas(); 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar de destacados: " + ex.Message);
+            }
+        }
+
+        private void CargarNoticiasDestacadas()
+        {
+            try
+            {
+                PanelDestacados.Children.Clear(); 
+
+                var client = new MongoClient(connectionString);
+                var database = client.GetDatabase("noticiero_db");
+                var collection = database.GetCollection<BsonDocument>("noticias");
+
+                var filtro = Builders<BsonDocument>.Filter.Eq("es_destacado", true);
+                var noticias = collection.Find(filtro).ToList();
+
+                foreach (var noticia in noticias)
+                {
+                    string titulo = noticia.GetValue("titulo", "").AsString;
+                    string imagen = "https://via.placeholder.com/400x140"; 
+                    Border border = new Border
+                    {
+                        Background = new SolidColorBrush(Color.FromRgb(250, 212, 91)),
+                        CornerRadius = new CornerRadius(10),
+                        Padding = new Thickness(10),
+                        Margin = new Thickness(10),
+                        Width = 300
+                    };
+
+                    Grid grid = new Grid();
+
+                   
+                    Image img = new Image
+                    {
+                        Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(imagen)),
+                        Height = 140,
+                        Stretch = Stretch.Fill
+                    };
+                    grid.Children.Add(img);
+
+                    Button btnEliminar = new Button
+                    {
+                        Content = "★",
+                        Width = 30,
+                        Height = 30,
+                        HorizontalAlignment = HorizontalAlignment.Right,
+                        VerticalAlignment = VerticalAlignment.Top,
+                        Background = new SolidColorBrush(Color.FromRgb(234, 154, 37)),
+                        Foreground = Brushes.White,
+                        FontWeight = FontWeights.Bold,
+                        Margin = new Thickness(5),
+                        Tag = titulo
+                    };
+                    btnEliminar.Click += BtnEliminarFavorito_Click;
+                    grid.Children.Add(btnEliminar);
+
+                    // Texto
+                    StackPanel textoPanel = new StackPanel
+                    {
+                        Background = new SolidColorBrush(Color.FromArgb(170, 0, 0, 0)),
+                        VerticalAlignment = VerticalAlignment.Bottom
+                    };
+
+                    TextBlock text = new TextBlock
+                    {
+                        Text = titulo,
+                        Foreground = Brushes.White,
+                        FontWeight = FontWeights.Bold,
+                        Padding = new Thickness(5),
+                        TextWrapping = TextWrapping.Wrap
+                    };
+                    textoPanel.Children.Add(text);
+                    grid.Children.Add(textoPanel);
+
+                    border.Child = grid;
+                    PanelDestacados.Children.Add(border);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar destacados: " + ex.Message);
+            }
+        }
+
+
+
+
     }
 }

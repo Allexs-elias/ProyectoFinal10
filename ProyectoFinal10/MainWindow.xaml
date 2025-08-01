@@ -62,71 +62,96 @@
                 <ScrollViewer Background="#FFEFEFEF">
                     <StackPanel Margin="30" HorizontalAlignment="Center">
                         <WrapPanel HorizontalAlignment="Center" ItemWidth="400" ItemHeight="220">
+
+                            <!-- NOTICIA 1 -->
                             <Border Width="400" Height="220" Background="Black" Margin="10">
                                 <Grid>
                                     <Image Source="https://via.placeholder.com/400x140" Stretch="Fill"/>
+
+                                    <!-- Botón de favorito -->
+                                    <Button Content="★"
+                                Click="BtnFavorito_Click"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Width="30"
+                                Height="30"
+                                Background="#FFEA9A25"
+                                Foreground="White"
+                                FontSize="16"
+                                FontWeight="Bold"
+                                Margin="5"
+                                Tag="La NASA lanza nuevo satélite de vigilancia global"/>
+
                                     <StackPanel VerticalAlignment="Bottom" Background="#AA000000">
                                         <TextBlock Text="La NASA lanza nuevo satélite de vigilancia global" TextWrapping="Wrap" Foreground="White" FontWeight="Bold" Padding="5"/>
                                     </StackPanel>
                                 </Grid>
                             </Border>
 
+                            <!-- NOTICIA 2 -->
                             <Border Width="400" Height="220" Background="Black" Margin="10">
                                 <Grid>
                                     <Image Source="https://via.placeholder.com/400x140" Stretch="Fill"/>
+
+                                    <!-- Botón de favorito -->
+                                    <Button Content="★"
+                                Click="BtnFavorito_Click"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Width="30"
+                                Height="30"
+                                Background="#FFEA9A25"
+                                Foreground="White"
+                                FontSize="16"
+                                FontWeight="Bold"
+                                Margin="5"
+                                Tag="Economía global se estabiliza tras meses de incertidumbre"/>
+
                                     <StackPanel VerticalAlignment="Bottom" Background="#AA000000">
                                         <TextBlock Text="Economía global se estabiliza tras meses de incertidumbre" TextWrapping="Wrap" Foreground="White" FontWeight="Bold" Padding="5"/>
                                     </StackPanel>
                                 </Grid>
                             </Border>
+
                         </WrapPanel>
 
+                        <!-- NOTICIA 3 -->
                         <Border Width="Auto" Height="260" Background="Black" Margin="10">
                             <Grid>
                                 <Image Source="https://via.placeholder.com/820x160" Stretch="Fill"/>
+
+                                <!-- Botón de favorito -->
+                                <Button Content="★"
+                            Click="BtnFavorito_Click"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Width="30"
+                            Height="30"
+                            Background="#FFEA9A25"
+                            Foreground="White"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Margin="5"
+                            Tag="Descubren tecnología de IA que predice enfermedades antes de que aparezcan los síntomas"/>
+
                                 <StackPanel VerticalAlignment="Bottom" Background="#AA000000">
                                     <TextBlock Text="Descubren tecnología de IA que predice enfermedades antes de que aparezcan los síntomas" TextWrapping="Wrap" Foreground="White" FontWeight="Bold" Padding="5"/>
                                 </StackPanel>
                             </Grid>
                         </Border>
+
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
 
+
             <!-- Destacado -->
             <TabItem Header="Destacado">
                 <ScrollViewer Background="#FFFDF6DC">
-                    <UniformGrid Columns="2" Rows="2" Margin="20" HorizontalAlignment="Center">
-                        <Border Background="#FFFAD45B" CornerRadius="10" Padding="10" Margin="10">
-                            <StackPanel>
-                                <Image Source="https://ichef.bbci.co.uk/news/640/cpsprodpb/14D2/production/_131774697_gettyimages-1785313720.jpg" Width="250" Height="140" HorizontalAlignment="Center"/>
-                                <TextBlock Text="Histórica victoria de México en el Mundial Femenil" FontSize="14" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0"/>
-                            </StackPanel>
-                        </Border>
-
-                        <Border Background="#FFF77B47" CornerRadius="10" Padding="10" Margin="10">
-                            <StackPanel>
-                                <Image Source="https://ichef.bbci.co.uk/news/976/cpsprodpb/1816F/production/_131842211_afp.jpg" Width="250" Height="140" HorizontalAlignment="Center"/>
-                                <TextBlock Text="Nueva ley ambiental busca frenar la deforestación" FontSize="14" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0"/>
-                            </StackPanel>
-                        </Border>
-
-                        <Border Background="#FFFAD45B" CornerRadius="10" Padding="10" Margin="10">
-                            <StackPanel>
-                                <Image Source="https://imagenes.elpais.com/resizer/wqPU9rq7Tz3-SNQWvuwSG5FrYxk=/1960x1470/cloudfront-eu-central-1.images.arcpublishing.com/prisa/2CBCEUZMK5BGZMQ3MDK6YCE3KY.jpg" Width="250" Height="140" HorizontalAlignment="Center"/>
-                                <TextBlock Text="Científicos logran avance en energía de fusión nuclear" FontSize="14" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0"/>
-                            </StackPanel>
-                        </Border>
-
-                        <Border Background="#FFF77B47" CornerRadius="10" Padding="10" Margin="10">
-                            <StackPanel>
-                                <Image Source="https://imgmedia.libero.pe/640x372/libero/original/2023/10/17/652ee85913767d1c707936f4.jpg" Width="250" Height="140" HorizontalAlignment="Center"/>
-                                <TextBlock Text="Lionel Messi nominado al Balón de Oro 2024" FontSize="14" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0"/>
-                            </StackPanel>
-                        </Border>
-                    </UniformGrid>
+                    <WrapPanel x:Name="PanelDestacados" Margin="20" HorizontalAlignment="Center" ItemWidth="300" ItemHeight="Auto"/>
                 </ScrollViewer>
             </TabItem>
+
 
             <!-- Buscar con CRUD -->
             <TabItem Header="Buscar">
