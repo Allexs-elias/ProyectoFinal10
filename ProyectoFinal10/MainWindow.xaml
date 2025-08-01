@@ -38,24 +38,39 @@
             </TabControl.Resources>
 
             <!-- Descubrir -->
-            <TabItem Header="Descubrir">
-                <Grid Background="#FFFDF6DC">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="1.5*"/>
-                    </Grid.ColumnDefinitions>
+            <WrapPanel x:Name="PanelDescubrir" Margin="10" Background="Black">
+                <Border Background="#FF2E2E2E" CornerRadius="10" Padding="5" Margin="10" Width="300">
+                    <Grid>
+                        <!-- Imagen -->
+                        <Image Source="https://via.placeholder.com/400x140"
+                   Height="140" Stretch="Fill"/>
 
-                    <UniformGrid Rows="2" Columns="2" Margin="10" Grid.ColumnSpan="2">
-                        <Rectangle Fill="#FFFAD45B" Margin="10"/>
-                        <Rectangle Fill="#FFFAD45B" Margin="10"/>
-                        <Rectangle Fill="#FFFAD45B" Margin="10"/>
-                        <Rectangle Fill="#FFFAD45B" Margin="10"/>
-                    </UniformGrid>
+                        <!-- Botón Estrella -->
+                        <Button Content="★"
+                    Width="30"
+                    Height="30"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Background="#FFFAAF3C"
+                    Foreground="Black"
+                    FontWeight="Bold"
+                    Margin="5"/>
 
-                    <Rectangle Fill="#FFF77B47" Grid.Column="2" Margin="10"/>
-                </Grid>
-            </TabItem>
+                        <!-- Título sobre fondo oscuro -->
+                        <StackPanel Background="#AA000000"
+                        VerticalAlignment="Bottom">
+                            <TextBlock Text="Título de la noticia"
+                           Foreground="White"
+                           Padding="5"
+                           FontWeight="Bold"
+                           TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </WrapPanel>
+
+
+
 
             <!-- Recientes -->
             <TabItem Header="Recientes">
@@ -79,7 +94,7 @@
                                 Foreground="White"
                                 FontSize="16"
                                 FontWeight="Bold"
-                                Margin="5"
+                                Margin="18"
                                 Tag="La NASA lanza nuevo satélite de vigilancia global"/>
 
                                     <StackPanel VerticalAlignment="Bottom" Background="#AA000000">
@@ -104,7 +119,7 @@
                                 Foreground="White"
                                 FontSize="16"
                                 FontWeight="Bold"
-                                Margin="5"
+                                Margin="18"
                                 Tag="Economía global se estabiliza tras meses de incertidumbre"/>
 
                                     <StackPanel VerticalAlignment="Bottom" Background="#AA000000">
