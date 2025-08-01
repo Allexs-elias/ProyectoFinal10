@@ -18,6 +18,10 @@ namespace Proyecto_Final
             InitializeComponent();
             MainTabControl.SelectedIndex = 3;
             ActualizarColorBotones(3);
+            CargarNoticias();
+            CargarNoticiasDescubrir();
+            CargarNoticiasRecientes();
+            CargarNoticiasDestacadas();
         }
 
         private void ActualizarColorBotones(int index)
@@ -40,9 +44,9 @@ namespace Proyecto_Final
         }
 
         private void BtnDescubrir_Click(object sender, RoutedEventArgs e) => CambiarTab(0);
-        private void BtnRecientes_Click(object sender, RoutedEventArgs e) => CambiarTab(1);
+        private void BtnRecientes_Click(object sender, RoutedEventArgs e) => CambiarTab(1); 
         private void BtnDestacado_Click(object sender, RoutedEventArgs e) => CambiarTab(2);
-        private void BtnBuscar_Click(object sender, RoutedEventArgs e) { CambiarTab(3); CargarNoticias(); }
+        private void BtnBuscar_Click(object sender, RoutedEventArgs e) => CambiarTab(3);
 
         private void CambiarTab(int index)
         {
@@ -314,7 +318,180 @@ namespace Proyecto_Final
                 MessageBox.Show("Error al cargar destacados: " + ex.Message);
             }
         }
+        private void CargarNoticiasDescubrir()
+        {
+            try
+            {
+                PanelDescubrir.Children.Clear(); 
 
+                var client = new MongoClient(connectionString);
+                var database = client.GetDatabase("noticiero_db");
+                var collection = database.GetCollection<BsonDocument>("noticias");
+
+                var noticias = collection.Find(new BsonDocument()).ToList();
+
+                foreach (var noticia in noticias)
+                {
+                    string titulo = noticia.GetValue("titulo", "").AsString;
+                    string imagen = "https://via.placeholder.com/400x140";
+
+                    Border border = new Border
+                    {
+                        Background = new SolidColorBrush(Color.FromRgb(46, 46, 46)),
+                        CornerRadius = new CornerRadius(10),
+                        Padding = new Thickness(5),
+                        Margin = new Thickness(10),
+                        Width = 300
+                    };
+
+                    Grid grid = new Grid();
+
+                    Image img = new Image
+                    {
+                        Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(imagen)),
+                        Height = 140,
+                        Stretch = Stretch.Fill
+                    };
+                    grid.Children.Add(img);
+
+                    Button estrella = new Button
+                    {
+                        Content = "★",
+                        Width = 30,
+                        Height = 30,
+                        HorizontalAlignment = HorizontalAlignment.Right,
+                        VerticalAlignment = VerticalAlignment.Top,
+                        Background = new SolidColorBrush(Color.FromRgb(250, 175, 60)),
+                        Foreground = Brushes.Black,
+                        FontWeight = FontWeights.Bold,
+                        Margin = new Thickness(5),
+                        Tag = titulo
+                    };
+                    estrella.Click += BtnFavorito_Click;
+                    grid.Children.Add(estrella);
+
+                    StackPanel textoPanel = new StackPanel
+                    {
+                        Background = new SolidColorBrush(Color.FromArgb(170, 0, 0, 0)),
+                        VerticalAlignment = VerticalAlignment.Bottom
+                    };
+
+                    TextBlock text = new TextBlock
+                    {
+                        Text = titulo,
+                        Foreground = Brushes.White,
+                        FontWeight = FontWeights.Bold,
+                        Padding = new Thickness(5),
+                        TextWrapping = TextWrapping.Wrap
+                    };
+                    textoPanel.Children.Add(text);
+                    grid.Children.Add(textoPanel);
+
+                    border.Child = grid;
+                    PanelDescubrir.Children.Add(border);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar descubrir: " + ex.Message);
+            }
+        }
+
+        private void CargarNoticiasRecientes()
+        {
+            try
+            {
+                PanelRecientes.Children.Clear();
+
+                var client = new MongoClient(connectionString);
+                var database = client.GetDatabase("noticiero_db");
+                var collection = database.GetCollection<BsonDocument>("noticias");
+
+                var fechaLimite = DateTime.UtcNow.AddDays(-3);
+                var filtro = Builders<BsonDocument>.Filter.Gte("fecha_publicacion", fechaLimite);
+                var noticias = collection.Find(filtro).SortByDescending(n => n["fecha_publicacion"]).ToList();
+
+                foreach (var noticia in noticias)
+                {
+                    string titulo = noticia.GetValue("titulo", "").AsString;
+                    string imagen = noticia.Contains("imagen") ? noticia["imagen"].AsString : "https://via.placeholder.com/400x140";
+
+                    Border border = new Border
+                    {
+                        Background = new SolidColorBrush(Color.FromRgb(46, 46, 46)),
+                        CornerRadius = new CornerRadius(10),
+                        Padding = new Thickness(5),
+                        Margin = new Thickness(10),
+                        Width = 300,  
+                        Height = Double.NaN 
+                    };
+
+                    Grid grid = new Grid();
+
+                    Image img = new Image
+                    {
+                        Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(imagen)),
+                        Height = 140,     
+                        Stretch = Stretch.Fill
+                    };
+                    grid.Children.Add(img);
+
+                    Button btnFavorito = new Button
+                    {
+                        Content = "★",
+                        Tag = titulo,
+                        Width = 30,
+                        Height = 30,
+                        HorizontalAlignment = HorizontalAlignment.Right,
+                        VerticalAlignment = VerticalAlignment.Top,
+                        Background = new SolidColorBrush(Color.FromRgb(250, 175, 60)), 
+                        Foreground = Brushes.Black,                                      
+                        FontWeight = FontWeights.Bold,
+                        Margin = new Thickness(5)
+                    };
+                    btnFavorito.Click += BtnFavorito_Click;
+                    grid.Children.Add(btnFavorito);
+
+                    StackPanel textoPanel = new StackPanel
+                    {
+                        Background = new SolidColorBrush(Color.FromArgb(170, 0, 0, 0)),
+                        VerticalAlignment = VerticalAlignment.Bottom
+                    };
+
+                    TextBlock text = new TextBlock
+                    {
+                        Text = titulo,
+                        Foreground = Brushes.White,
+                        FontWeight = FontWeights.Bold,
+                        Padding = new Thickness(5),
+                        TextWrapping = TextWrapping.Wrap
+                    };
+                    textoPanel.Children.Add(text);
+                    grid.Children.Add(textoPanel);
+
+                    border.Child = grid;
+                    PanelRecientes.Children.Add(border);
+                }
+
+                if (noticias.Count == 0)
+                {
+                    TextBlock mensaje = new TextBlock
+                    {
+                        Text = "No hay noticias recientes.",
+                        Foreground = Brushes.Gray,
+                        FontSize = 18,
+                        FontWeight = FontWeights.Bold,
+                        Margin = new Thickness(10),
+                        HorizontalAlignment = HorizontalAlignment.Center
+                    };
+                    PanelRecientes.Children.Add(mensaje);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar noticias recientes: " + ex.Message);
+            }
+        }
 
 
 

@@ -76,96 +76,21 @@
             <TabItem Header="Recientes">
                 <ScrollViewer Background="#FFEFEFEF">
                     <StackPanel Margin="30" HorizontalAlignment="Center">
-                        <WrapPanel HorizontalAlignment="Center" ItemWidth="400" ItemHeight="220">
-
-                            <!-- NOTICIA 1 -->
-                            <Border Width="400" Height="220" Background="Black" Margin="10">
-                                <Grid>
-                                    <Image Source="https://via.placeholder.com/400x140" Stretch="Fill"/>
-
-                                    <!-- Botón de favorito -->
-                                    <Button Content="★"
-                                Click="BtnFavorito_Click"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Top"
-                                Width="30"
-                                Height="30"
-                                Background="#FFEA9A25"
-                                Foreground="White"
-                                FontSize="16"
-                                FontWeight="Bold"
-                                Margin="18"
-                                Tag="La NASA lanza nuevo satélite de vigilancia global"/>
-
-                                    <StackPanel VerticalAlignment="Bottom" Background="#AA000000">
-                                        <TextBlock Text="La NASA lanza nuevo satélite de vigilancia global" TextWrapping="Wrap" Foreground="White" FontWeight="Bold" Padding="5"/>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-
-                            <!-- NOTICIA 2 -->
-                            <Border Width="400" Height="220" Background="Black" Margin="10">
-                                <Grid>
-                                    <Image Source="https://via.placeholder.com/400x140" Stretch="Fill"/>
-
-                                    <!-- Botón de favorito -->
-                                    <Button Content="★"
-                                Click="BtnFavorito_Click"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Top"
-                                Width="30"
-                                Height="30"
-                                Background="#FFEA9A25"
-                                Foreground="White"
-                                FontSize="16"
-                                FontWeight="Bold"
-                                Margin="18"
-                                Tag="Economía global se estabiliza tras meses de incertidumbre"/>
-
-                                    <StackPanel VerticalAlignment="Bottom" Background="#AA000000">
-                                        <TextBlock Text="Economía global se estabiliza tras meses de incertidumbre" TextWrapping="Wrap" Foreground="White" FontWeight="Bold" Padding="5"/>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-
-                        </WrapPanel>
-
-                        <!-- NOTICIA 3 -->
-                        <Border Width="Auto" Height="260" Background="Black" Margin="10">
-                            <Grid>
-                                <Image Source="https://via.placeholder.com/820x160" Stretch="Fill"/>
-
-                                <!-- Botón de favorito -->
-                                <Button Content="★"
-                            Click="BtnFavorito_Click"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            Width="30"
-                            Height="30"
-                            Background="#FFEA9A25"
-                            Foreground="White"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Margin="5"
-                            Tag="Descubren tecnología de IA que predice enfermedades antes de que aparezcan los síntomas"/>
-
-                                <StackPanel VerticalAlignment="Bottom" Background="#AA000000">
-                                    <TextBlock Text="Descubren tecnología de IA que predice enfermedades antes de que aparezcan los síntomas" TextWrapping="Wrap" Foreground="White" FontWeight="Bold" Padding="5"/>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-
+                        <!-- Panel dinámico donde se agregan las noticias recientes -->
+                        <WrapPanel x:Name="PanelRecientes" HorizontalAlignment="Center" ItemWidth="400" ItemHeight="220"/>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
 
 
             <!-- Destacado -->
-            <TabItem Header="Destacado">
-                <ScrollViewer Background="#FFFDF6DC">
-                    <WrapPanel x:Name="PanelDestacados" Margin="20" HorizontalAlignment="Center" ItemWidth="300" ItemHeight="Auto"/>
+            <TabItem Header="Destacados">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <WrapPanel x:Name="PanelDestacados" Margin="10" />
                 </ScrollViewer>
             </TabItem>
+
+
 
 
             <!-- Buscar con CRUD -->
